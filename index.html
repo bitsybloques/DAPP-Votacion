@@ -33,7 +33,7 @@
         <input type="text" id="candidate" />
         <a href="#" onclick="voteForCandidate()" class="btn btn-primary">Votar</a>
         
-        <button id="button">Votar</button>
+        
 
     </div>
     
@@ -54,11 +54,11 @@
 		"constant": true,
 		"inputs": [
 			{
-				"name": "",
+				"name": "candidate",
 				"type": "bytes32"
 			}
 		],
-		"name": "votesReceived",
+		"name": "totalVotesFor",
 		"outputs": [
 			{
 				"name": "",
@@ -92,11 +92,11 @@
 		"constant": true,
 		"inputs": [
 			{
-				"name": "candidate",
+				"name": "",
 				"type": "bytes32"
 			}
 		],
-		"name": "totalVotesFor",
+		"name": "votesReceived",
 		"outputs": [
 			{
 				"name": "",
@@ -154,29 +154,36 @@
 ]);
         
         //añadimos direccion del contrato (lo copiamos de Remix)
-        var Vote = VoteContract.at('0x0c76ec38b29da3aaaafabb6cbfcdbdb88e49f0ec');
+        var Vote = VoteContract.at('0x18db656a68cd485c08d18681956123db58213b1b');
         
         //definimos las opciones a votar
         candidates = {"Azul": "candidate-1", "Rojo": "candidate-2", "Verde": "candidate-3"}
 
+		
         //usamos jQuery para las funciones ($)
+       
+		
 
-        
-        
+		function voteForCandidate(candidate) {
+ 			candidateName = $("#candidate").val();
+ 				try {
+  					Vote.voteForCandidate(candidateName,function() {
+   						let div_id = candidates[candidateName];
+   						$("#"+div_id).html(Vote.totalVotesFor.call(candidateName).toString());
+  					});
+ 				} catch (err) {
+ 				}
+			}
 
-        $("#button").click(function() {
-            Vote.voteForCandidate($("#candidate").val());
-       });
-
-
-
-
-
-
-
-
-
-
+		$(document).ready(function() {
+			
+ 			candidateNames = Object.keys(candidates);
+ 				for (var i = 0; i < candidateNames.length; i++) {
+  					let name = candidateNames[i];
+  					let val = Vote.totalVotesFor.call(name).toString()
+  					$("#"+candidates[name]).html(val);
+ 					}
+			});
 
 
      </script>
