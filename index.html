@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Bits y Bloques: Smart Contract</title>
+    <title>Smart Contract Example</title>
 
     
     <script src="./node_modules/web3/dist/web3.min.js"></script>
@@ -14,7 +14,7 @@
 <body>
     <div class="container">
 
-        <h1>Bits y Bloques: sistema de votación por Smart Contract</h1>
+        <h1>Sistema de votación por Smart Contract</h1>
 
         <h2>¡Vota a tu color favorito!</h2><p></p>
         <label for="name" class="col-lg-2 control-label">Azul</label>
@@ -54,11 +54,11 @@
 		"constant": true,
 		"inputs": [
 			{
-				"name": "candidate",
+				"name": "",
 				"type": "bytes32"
 			}
 		],
-		"name": "totalVotesFor",
+		"name": "votesReceived",
 		"outputs": [
 			{
 				"name": "",
@@ -77,26 +77,7 @@
 				"type": "bytes32"
 			}
 		],
-		"name": "validCandidate",
-		"outputs": [
-			{
-				"name": "",
-				"type": "bool"
-			}
-		],
-		"payable": false,
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"constant": true,
-		"inputs": [
-			{
-				"name": "",
-				"type": "bytes32"
-			}
-		],
-		"name": "votesReceived",
+		"name": "totalVotesFor",
 		"outputs": [
 			{
 				"name": "",
@@ -154,7 +135,7 @@
 ]);
         
         //añadimos direccion del contrato (lo copiamos de Remix)
-        var Vote = VoteContract.at('0x18db656a68cd485c08d18681956123db58213b1b');
+        var Vote = VoteContract.at('0xd7c382330573c2508bbb7611489308b9ff5d07b7');
         
         //definimos las opciones a votar
         candidates = {"Azul": "candidate-1", "Rojo": "candidate-2", "Verde": "candidate-3"}
